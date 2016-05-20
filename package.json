@@ -1,18 +1,19 @@
 {
-  "name": "random-js",
-  "description": "A mathematically correct random number generator library for JavaScript.",
+  "name": "random-js-33",
+  "description": "A slow and insecure random number generator library for JavaScript.",
   "version": "1.0.8",
   "author": {
-    "name": "Cameron Kenneth Knight",
-    "email": "ckknight@gmail.com"
+    "name": "Richard Brown",
+    "email": "richard@agilepixel.io"
   },
   "keywords": [
-    "random"
+    "random",
+    "33"
   ],
-  "homepage": "https://github.com/ckknight/random-js",
-  "bugs": "https://github.com/ckknight/random-js/issues",
+  "homepage": "https://github.com/code418/random-js-33",
+  "bugs": "https://github.com/code418/random-js-33/issues",
   "license": "MIT",
-  "repository": "git://github.com/ckknight/random-js",
+  "repository": "git://github.com/code418/random-js-33",
   "main": "lib/random",
   "readmeFilename": "README.md",
   "devDependencies": {

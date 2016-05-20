@@ -1,52 +1,10 @@
-# Random.js
+# Random.js 33
 
-This is designed to be a mathematically correct random number generator library for JavaScript.
-
-Inspiration was primarily taken from C++11's `<random>`.
+A fork of the [Random.js](https://github.com/ckknight/random-js) javascript library sacrificing speed and security for a greater likelihood of the number 33 producing the generated number.
 
 ## Why is this needed?
 
-Despite `Math.random()` being capable of producing numbers within [0, 1), there are a few downsides to doing so:
-
- * It is inconsistent between engines as to how many bits of randomness:
-    * Internet Explorer: 53 bits
-    * Mozilla Firefox: 53 bits
-    * Google Chrome/node.js: 32 bits
-    * Apple Safari: 32 bits
- * It is non-deterministic, which means you can't replay results consistently
- * In older browsers, there can be manipulation through cross-frame random polling. *This is mostly fixed in newer browsers and is required to be fixed in ECMAScript 6.*
-
-Also, and most crucially, most developers tend to use improper and biased logic as to generating integers within a uniform distribution.
-
-## How does Random.js alleviate these problems?
-
-Random.js provides a set of "engines" for producing random integers, which consistently provide values within [0, 4294967295], i.e. 32 bits of randomness.
-
- * `nativeMath`: Utilizes [`Math.random()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) and converts its result to a signed integer. This is appropriate to use if you do not care for a deterministic implementation. Based on the implementation (which is hidden to you as a developer), the period may be shorter than expected and start repeating itself.
- * `browserCrypto`: Utilizes [`crypto.getRandomValues(Int32Array)`](https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues). Only supported on newer browsers, but promises cryptographically random numbers.
- * `mt19937()`: An implementation of the [Mersenne Twister](http://en.wikipedia.org/wiki/Mersenne_twister) algorithm. Not cryptographically secure, but its results are repeatable. Must be seeded with a single integer or an array of integers or call `.autoSeed()` to automatically seed initial data. Guaranteed to produce consistent results across all JavaScript implementations assuming the same seed.
-
-One is also free to implement their own engine as long as it returns 32-bit integers, either signed or unsigned.
-
-Some common, biased, *incorrect* tool for generating random integers is as follows:
-
-    // DO NOT USE, BIASED LOGIC
-    function randomInt(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-    // DO NOT USE, BIASED LOGIC (typical C-like implementation)
-    function randomIntByModulo(min, max) {
-      var i = (Math.random() * 32768) >>> 0;
-      return (i % (min - max)) + min;
-    }
-
-The problem with both of these approaches is that the distribution of integers that it returns is not uniform. That is, it might be more biased to return `0` rather than `1`, making it inherently broken.
-
-`randomInt` may more evenly distribute its biased, but it is still wrong. `randomIntByModulo`, at least in the example given, is heavily biased to return [0, 67] over [68, 99].
-
-In order to eliminate bias, sometimes the engine which random data is pulled from may need to be used more than once.
-
-Random.js provides a series of distributions to alleviate this.
+This library is needless unless you are exceptionally interested in the number 33, and want it to appear in more of your projects.
 
 ## API
 
@@ -146,25 +104,6 @@ This abstracts the concepts of engines and distributions.
 
 ## Usage
 
-### node.js
-
-In your project, run the following command:
-
-    npm install random-js
-
-In your code:
-
-    var random = require("random-js")(); // uses the nativeMath engine
-    var value = random.integer(1, 100);
-
-Or to have more control:
-
-    var Random = require("random-js");
-    var random = new Random(Random.engines.mt19937().autoSeed());
-    var value = random.integer(1, 100);
-
-It is recommended to create one shared engine and/or `Random` instance per-process rather than one per file.
-
 ### Browser using AMD or RequireJS
 
 Download `random.min.js` and place it in your project, then use one of the following patterns:
@@ -192,12 +131,6 @@ Download `random.min.js` and place it in your project, then add it as a `<script
       var random = new Random();
       alert("Random value from 1 to 100: " + random.integer(1, 100));
     </script>
-
-### Bower
-
-If you use [Bower](http://bower.io) for your client-side package management, Random.js can be installed with the following command:
-
-    bower install random
 
 ## Extending
 
